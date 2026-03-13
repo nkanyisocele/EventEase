@@ -24,7 +24,7 @@ namespace EventEase.Controllers
         public IActionResult Create()
         {
             var venues = context.Venues.OrderByDescending(p => p.VenueId).ToList();
-            return View(venues); 
+            return View(venues);
         }
         [HttpPost]
         public IActionResult Create(VenueDto venueDto)
@@ -54,8 +54,28 @@ namespace EventEase.Controllers
                 Capacity = venueDto.Capacity,
                 ImageFileName = "/venues/" + newFileName
             };
+            context.Venues.Add(venue);
+            context.SaveChanges();
 
             return RedirectToAction("Index", "Venue");
+        }
+
+        public IActionResult Edit(int VenueId)
+        {
+             var venue = context.Venues.Find(VenueId);
+            if (venue == null)
+            {
+                return RedirectToAction("Index", "Venue");
+            }
+            VenueDto venueDto = new VenueDto
+            {
+                VenueId = venue.VenueId,
+                VenueName = venue.VenueName,
+                Location = venue.Location,
+                Capacity = venue.Capacity,
+                
+            };
+            return View(venueDto);
         }
     }
 }

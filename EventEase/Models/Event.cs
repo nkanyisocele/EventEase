@@ -16,7 +16,7 @@ namespace EventEase.Models
         public DateTime EventDate { get; set; }
         public string Description { get; set; } = "";
         public int VenueId{ get; set; }
-        
-
+        public int BookingId { get; internal set; }
+        public DateTime BookingDate { get; internal set; }
     }
 }

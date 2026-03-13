@@ -33,11 +33,30 @@ namespace EventEase.Controllers
                 EventDate = eventDto.EventDate,
                 Description = eventDto.Description,
                 VenueId = eventDto.VenueId
-            };  
-
+            };
+            context.Events.Add(newEvent);
+            context.SaveChanges();
 
 
             return RedirectToAction("Index", "Event");
+        }
+        public IActionResult Edit(int EventId)
+        {
+            var eventt = context.Events.Find(EventId);
+            if (eventt == null)
+            {
+                return RedirectToAction("Index", "Event");
+            }
+            
+            EventDto eventDto = new EventDto
+            {
+                EventId = eventt.EventId,
+                EventName = eventt.EventName,
+                EventDate = eventt.EventDate,
+                Description = eventt.Description,
+                VenueId = eventt.VenueId
+            };
+            return View(eventDto);
         }
     }
 }

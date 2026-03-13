@@ -27,17 +27,34 @@ namespace EventEase.Controllers
         }
         public IActionResult Create(BookingDto bookingDto)
         {
-            Booking newBooking = new Booking
+            Booking booking = new Booking
             {
                 BookingId = bookingDto.BookingId,
                 EventId = bookingDto.EventId,
                 VenueId = bookingDto.VenueId,
                 BookingDate = bookingDto.BookingDate
             };
+            context.Bookings.Add(booking);
+            context.SaveChanges();
 
 
-
-            return RedirectToAction("Index", "Event");
+            return RedirectToAction("Index", "Booking");
+        }
+        public IActionResult Edit(int BookingId)
+        {
+            var booking = context.Events.Find(BookingId);
+            if (booking == null)
+            {
+                return RedirectToAction("Index", "Booking");
+            }
+            BookingDto bookingDto = new BookingDto
+            {
+                BookingId = booking.BookingId,
+                EventId = booking.EventId,
+                VenueId = booking.VenueId,
+                BookingDate = booking.BookingDate
+            };
+            return View(bookingDto);
         }
     }   
 }
