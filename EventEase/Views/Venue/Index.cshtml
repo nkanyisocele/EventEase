@@ -19,7 +19,7 @@
 			<th>Venue Name</th>
 			<th>Location</th>
 			<th>Capacity</th>
-			<th>Image Url</th>			
+			<th>Image FileName</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -32,7 +32,7 @@
 				<td>@venue.VenueName</td>
 				<td>@venue.Location</td>
 				<td>@venue.Location</td>
-				<td><img src="/venueS/@venue.ImageUrl" width=100 /></td>
+				<td><img src="/venues/@venue.ImageFileName" width=100 /></td>
 				<td style="white-space:nowrap">
 					<a class="btn btn-primary btn-sm" asp-controller="Venues" asp-action="Edit"
 					   asp-route-id="@venue.VenueId">Edit</a>

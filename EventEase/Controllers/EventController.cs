@@ -13,8 +13,14 @@ namespace EventEase.Controllers
         }
         public IActionResult Index()
         {
-            var events = context.Events.ToList();
+            var events = context.Events.OrderByDescending(p => p.EventId).ToList();
             return View(events);
+        }
+        public IActionResult Create()
+        {
+            
+                return View();
+            
         }
     }
 }

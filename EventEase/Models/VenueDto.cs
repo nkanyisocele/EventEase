@@ -2,16 +2,15 @@
 
 namespace EventEase.Models
 {
-    public class Venue
+    public class VenueDto
     {
-        [Key]
-        [Display(Name = "Venue Id")]
-        public int VenueId { get; set; }
         [Required]
-        [Display(Name = "Venue Name")]
         public string VenueName { get; set; } = "";
+        [Required]
         public string Location { get; set; } = "";
+        [Required]
         public int Capacity { get; set; }
-        public string ImageFileName { get; set; } = "";
+        
+        public IFormFile? ImageFile { get; set; }
     }
 }

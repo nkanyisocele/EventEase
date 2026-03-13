@@ -11,10 +11,10 @@ namespace EventEase.Models
         public int EventId { get; set; }
         [Required]
         [Display(Name = "Event Name")]
-        public string EventName { get; set; }
+        public string EventName { get; set; } = "";
         [Display(Name = "Event Date")]
         public DateTime EventDate { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
         public int VenueId{ get; set; }
         
 

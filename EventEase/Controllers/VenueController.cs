@@ -1,4 +1,5 @@
 ﻿using EventEase.Data;
+using EventEase.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventEase.Controllers
@@ -14,8 +15,14 @@ namespace EventEase.Controllers
 
         public IActionResult Index()
         {
-            var venues = context.Venues.ToList();
-            return View(venues);
-        } 
+            
+            return View();
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
     }
 }

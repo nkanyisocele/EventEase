@@ -1,0 +1,52 @@
+﻿@model VenueDto
+@{
+}
+
+
+<div class="row">
+	<div class="col-md-8 mx-auto rounded boarder p-3">
+		<h2 class="text-center mb-5">New Venue</h2>
+
+		<form method="post" enctype="multipart/form-data">
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label">Venue Name</label>
+				<div class="col-sm-8">
+					<input class="form-control" asp-for="VenueName">
+					<span asp-validation-for="VenueName" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label">Location</label>
+				<div class="col-sm-8">
+					<input class="form-control" asp-for="Location">
+					<span asp-validation-for="Location" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label">Capacity</label>
+				<div class="col-sm-8">
+					<input class="form-control" asp-for="Capacity">
+					<span asp-validation-for="Capacity" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label">Image</label>
+				<div class="col-sm-8">
+					<input class="form-control" asp-for="ImageFile">
+					<span asp-validation-for="ImageFile" class="text-danger"></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="offset-sm-4 col-sm-4 d-grid">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				<div class="col-sm-4 d-grid">
+					<a class="btn btn-outline-primary" asp-controller="Venues" asp-action="Index" role="button">Cancel</a>
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+</div>

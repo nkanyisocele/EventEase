@@ -13,8 +13,14 @@ namespace EventEase.Controllers
         }
         public IActionResult Index()
         {
-            var bookings = context.Bookings.ToList();
+            var bookings = context.Bookings.OrderByDescending(p => p.BookingId).ToList();
             return View(bookings);
         }
-    }
+        public IActionResult Create()
+        {
+            
+                return View();
+            
+        }
+    }   
 }
