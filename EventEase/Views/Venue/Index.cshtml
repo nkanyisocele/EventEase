@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Venue>
 @{
 }
+
+<h2 class="text-center mb-5">List Of Venues</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Venues" asp-action="Create">New Venue</a>
+    </div>
+    <div class="col">
+    </div>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Venue Name</th>
+			<th>Location</th>
+			<th>Capacity</th>
+			<th>Image Url</th>			
+			<th>Action</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var venue in Model)
+		{
+			<tr>
+				<td>@venue.VenueId</td>
+				<td>@venue.VenueName</td>
+				<td>@venue.Location</td>
+				<td>@venue.Location</td>
+				<td><img src="/venueS/@venue.ImageUrl" width=100 /></td>
+				<td style="white-space:nowrap">
+					<a class="btn btn-primary btn-sm" asp-controller="Venues" asp-action="Edit"
+					   asp-route-id="@venue.VenueId">Edit</a>
+					<a class="btn btn-danger btn-sm" asp-controller="Venues" asp-action="Delete"
+					   asp-route-id="@venue.VenueId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
