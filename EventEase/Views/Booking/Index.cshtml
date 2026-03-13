@@ -33,9 +33,9 @@
 				<td>@booking.VenueId</td>
 				<td>@booking.BookingDate.ToString("MM/dd/YYYY")</td>
 				<td style="white-space:nowrap">
-					<a class="btn btn-primary btn-sm" asp-controller="Venues" asp-action="Edit"
+					<a class="btn btn-primary btn-sm" asp-controller="Bookings" asp-action="Edit"
 					   asp-route-id="@booking.EventId">Edit</a>
-					<a class="btn btn-danger btn-sm" asp-controller="Venues" asp-action="Delete"
+					<a class="btn btn-danger btn-sm" asp-controller="Bookings" asp-action="Delete"
 					   asp-route-id="@booking.EventId">Delete</a>
 				</td>
 			</tr>
