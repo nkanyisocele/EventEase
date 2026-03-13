@@ -5,6 +5,8 @@ namespace EventEase.Models
     public class VenueDto
     {
         [Required]
+        public int VenueId { get; set; }
+        [Required]
         public string VenueName { get; set; } = "";
         [Required]
         public string Location { get; set; } = "";

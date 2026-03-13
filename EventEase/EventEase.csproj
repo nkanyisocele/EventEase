@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Views\EventMaster\" />
+    <Folder Include="wwwroot\venues\" />
   </ItemGroup>
 
 </Project>

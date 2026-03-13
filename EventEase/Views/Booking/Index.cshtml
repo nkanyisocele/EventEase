@@ -6,7 +6,7 @@
 
 <div class="row mb-5">
 	<div class="col">
-		<a class="btn btn-primary" asp-controller="Bookings" asp-action="Create">New Booking</a>
+		<a class="btn btn-primary" asp-controller="Booking" asp-action="Create">New Booking</a>
 	</div>
 	<div class="col">
 	</div>
@@ -15,12 +15,13 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
+			<th>Booking Id</th>
 			<th>Event Name</th>
 			<th>Event Date</th>
 			<th>Description</th>
 			<th>Venue Id</th>
-			<th>Action</th>
+            <th>Action</th>
+			
 		</tr>
 	</thead>
 
@@ -33,9 +34,9 @@
 				<td>@booking.VenueId</td>
 				<td>@booking.BookingDate.ToString("MM/dd/YYYY")</td>
 				<td style="white-space:nowrap">
-					<a class="btn btn-primary btn-sm" asp-controller="Bookings" asp-action="Edit"
+					<a class="btn btn-primary btn-sm" asp-controller="Booking" asp-action="Edit"
 					   asp-route-id="@booking.EventId">Edit</a>
-					<a class="btn btn-danger btn-sm" asp-controller="Bookings" asp-action="Delete"
+					<a class="btn btn-danger btn-sm" asp-controller="Booking" asp-action="Delete"
 					   asp-route-id="@booking.EventId">Delete</a>
 				</td>
 			</tr>

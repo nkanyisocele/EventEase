@@ -6,7 +6,7 @@
 
 <div class="row mb-5">
     <div class="col">
-        <a class="btn btn-primary" asp-controller="Venues" asp-action="Create">New Venue</a>
+        <a class="btn btn-primary" asp-controller="Venue" asp-action="Create">New Venue</a>
     </div>
     <div class="col">
     </div>
@@ -15,7 +15,7 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
+			<th>Venue Id</th>
 			<th>Venue Name</th>
 			<th>Location</th>
 			<th>Capacity</th>
@@ -25,7 +25,7 @@
 	</thead>
 
 	<tbody>
-		@foreach (var venue in Model)
+		@if (Model != null) foreach (var venue in Model)
 		{
 			<tr>
 				<td>@venue.VenueId</td>
@@ -34,9 +34,9 @@
 				<td>@venue.Location</td>
 				<td><img src="/venues/@venue.ImageFileName" width=100 /></td>
 				<td style="white-space:nowrap">
-					<a class="btn btn-primary btn-sm" asp-controller="Venues" asp-action="Edit"
+					<a class="btn btn-primary btn-sm" asp-controller="Venue" asp-action="Edit"
 					   asp-route-id="@venue.VenueId">Edit</a>
-					<a class="btn btn-danger btn-sm" asp-controller="Venues" asp-action="Delete"
+					<a class="btn btn-danger btn-sm" asp-controller="Venue" asp-action="Delete"
 					   asp-route-id="@venue.VenueId">Delete</a>
 				</td>
 			</tr>

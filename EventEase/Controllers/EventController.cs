@@ -1,4 +1,5 @@
 ﻿using EventEase.Data;
+using EventEase.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventEase.Controllers
@@ -6,10 +7,12 @@ namespace EventEase.Controllers
     public class EventController : Controller
     {
         private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment environment;
 
-        public EventController(ApplicationDbContext context)
+        public EventController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             this.context = context;
+            this.environment = environment;
         }
         public IActionResult Index()
         {
@@ -21,6 +24,20 @@ namespace EventEase.Controllers
             
                 return View();
             
+        }
+        public IActionResult Create(EventDto eventDto)
+        {
+            Event newEvent = new Event
+            {
+                EventName = eventDto.EventName,
+                EventDate = eventDto.EventDate,
+                Description = eventDto.Description,
+                VenueId = eventDto.VenueId
+            };  
+
+
+
+            return RedirectToAction("Index", "Event");
         }
     }
 }

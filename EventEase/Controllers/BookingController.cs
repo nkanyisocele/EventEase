@@ -1,4 +1,5 @@
 ﻿using EventEase.Data;
+using EventEase.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventEase.Controllers
@@ -6,10 +7,12 @@ namespace EventEase.Controllers
     public class BookingController : Controller
     {
         private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment environment;
 
-        public BookingController(ApplicationDbContext context)
+        public BookingController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             this.context = context;
+            this.environment = environment;
         }
         public IActionResult Index()
         {
@@ -21,6 +24,20 @@ namespace EventEase.Controllers
             
                 return View();
             
+        }
+        public IActionResult Create(BookingDto bookingDto)
+        {
+            Booking newBooking = new Booking
+            {
+                BookingId = bookingDto.BookingId,
+                EventId = bookingDto.EventId,
+                VenueId = bookingDto.VenueId,
+                BookingDate = bookingDto.BookingDate
+            };
+
+
+
+            return RedirectToAction("Index", "Event");
         }
     }   
 }
