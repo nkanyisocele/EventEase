@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace EventEase.Controllers
-{    
+{
     public class EventController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -22,9 +22,9 @@ namespace EventEase.Controllers
         }
         public IActionResult Create()
         {
-            
-                return View();
-            
+
+            return View();
+
         }
         public IActionResult Create(EventDto eventDto)
         {
@@ -48,7 +48,7 @@ namespace EventEase.Controllers
             {
                 return RedirectToAction("Index", "Event");
             }
-            
+
             EventDto eventDto = new EventDto
             {
                 EventId = eventt.EventId,
@@ -57,7 +57,7 @@ namespace EventEase.Controllers
                 Description = eventt.Description,
                 VenueId = eventt.VenueId
             };
-            
+
             ViewData["EventId"] = EventId;
             ViewData["EventName"] = eventt.EventName;
             ViewData["EventDate"] = eventt.EventDate.ToString("MM/dd/YYYY");
@@ -66,17 +66,31 @@ namespace EventEase.Controllers
 
             return View(eventDto);
 
-                
+
             eventt.EventName = eventDto.EventName;
             eventt.EventDate = eventDto.EventDate;
             eventt.Description = eventDto.Description;
             eventt.VenueId = eventDto.VenueId;
 
-           
+
 
             context.SaveChanges();
             return RedirectToAction("Index", "Event");
 
         }
+        public ActionResult Delete(int EventId)
+        {
+            var eventt = context.Events.Find(EventId);
+            if (eventt == null)
+            {
+                return RedirectToAction("Index", "Event");
+            }
+            context.Events.Remove(eventt);
+            context.SaveChanges(true);
+
+            return RedirectToAction("Index", "Event");
+        }
     }
 }
+
+

@@ -101,18 +101,32 @@ namespace EventEase.Controllers
                 string oldImageFullPath = environment.WebRootPath + "/venues/" + venue.ImageFileName;
                 System.IO.File.Delete(oldImageFullPath);
             }
-                
-                venue.VenueName = venueDto.VenueName;
-                venue.Location = venueDto.Location;
-                venue.Capacity = venueDto.Capacity;
-                venue.ImageFileName = newFileName;
 
-                context.SaveChanges();
-                return RedirectToAction("Index", "Venue");
+            venue.VenueName = venueDto.VenueName;
+            venue.Location = venueDto.Location;
+            venue.Capacity = venueDto.Capacity;
+            venue.ImageFileName = newFileName;
+
+            context.SaveChanges();
+            return RedirectToAction("Index", "Venue");
         }
-    }
+        public IActionResult Delete(int VenueId)
+        {
+            var venue = context.Venues.Find(VenueId);
+            if (venue == null)
+            {
+                return RedirectToAction("Index", "Venue");
+            }
+            string imageFullPath = environment.WebRootPath + "/venues/" + venue.ImageFileName;
+            System.IO.File.Delete(imageFullPath);
 
-            
-            
+            context.Venues.Remove(venue);
+            context.SaveChanges(true);
+
+            return RedirectToAction("Index", "Venue");
+        }
+
+
+    }       
             
 }

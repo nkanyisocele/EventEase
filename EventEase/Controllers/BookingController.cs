@@ -22,9 +22,9 @@ namespace EventEase.Controllers
         }
         public IActionResult Create()
         {
-            
-                return View();
-            
+
+            return View();
+
         }
         public IActionResult Create(BookingDto bookingDto)
         {
@@ -70,5 +70,17 @@ namespace EventEase.Controllers
             context.SaveChanges();
             return RedirectToAction("Index", "Booking");
         }
-    }   
+        public IActionResult Delete(int BookingId)
+        {
+            var booking = context.Bookings.Find(BookingId);
+            if (booking == null)
+            {
+                return RedirectToAction("Index", "Booking");
+            }
+            context.Bookings.Remove(booking);
+            context.SaveChanges(true);
+
+            return RedirectToAction("Index", "Booking");
+        }
+    }
 }
