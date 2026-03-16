@@ -1,6 +1,7 @@
 ﻿using EventEase.Data;
 using EventEase.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace EventEase.Controllers
@@ -62,7 +63,7 @@ namespace EventEase.Controllers
 
         public IActionResult Edit(int VenueId)
         {
-             var venue = context.Venues.Find(VenueId);
+            var venue = context.Venues.Find(VenueId);
             if (venue == null)
             {
                 return RedirectToAction("Index", "Venue");
@@ -73,9 +74,45 @@ namespace EventEase.Controllers
                 VenueName = venue.VenueName,
                 Location = venue.Location,
                 Capacity = venue.Capacity,
-                
+
             };
+
+
+            ViewData["VenueId"] = VenueId;
+            ViewData["VenueName"] = venue.VenueName;
+            ViewData["Location"] = venue.Location;
+            ViewData["Capacity"] = venue.Capacity;
+            ViewData["ImageFileName"] = venue.ImageFileName;
+
             return View(venueDto);
+
+            string newFileName = venue.ImageFileName;
+            if (venueDto.ImageFile != null)
+            {
+                ModelState.AddModelError("ImageFile", "The image file is redquired");
+                newFileName = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                newFileName += Path.GetExtension(venueDto.ImageFile!.FileName);
+
+                string imageFullPath = environment.WebRootPath + "/venues/" + newFileName;
+                using (var stream = System.IO.File.Create(imageFullPath))
+                {
+                    venueDto.ImageFile.CopyTo(stream);
+                }
+                string oldImageFullPath = environment.WebRootPath + "/venues/" + venue.ImageFileName;
+                System.IO.File.Delete(oldImageFullPath);
+            }
+                
+                venue.VenueName = venueDto.VenueName;
+                venue.Location = venueDto.Location;
+                venue.Capacity = venueDto.Capacity;
+                venue.ImageFileName = newFileName;
+
+                context.SaveChanges();
+                return RedirectToAction("Index", "Venue");
         }
     }
+
+            
+            
+            
 }

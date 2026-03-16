@@ -1,6 +1,7 @@
 ﻿using EventEase.Data;
 using EventEase.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace EventEase.Controllers
 {
@@ -54,7 +55,20 @@ namespace EventEase.Controllers
                 VenueId = booking.VenueId,
                 BookingDate = booking.BookingDate
             };
+
+            ViewData["BookingId"] = BookingId;
+            ViewData["EventId"] = booking.EventId;
+            ViewData["VenueId"] = booking.VenueId;
+            ViewData["BookingDate"] = booking.BookingDate.ToString("MM/dd/YYYY");
+
             return View(bookingDto);
+
+            booking.EventId = bookingDto.EventId;
+            booking.VenueId = bookingDto.VenueId;
+            booking.BookingDate = bookingDto.BookingDate;
+
+            context.SaveChanges();
+            return RedirectToAction("Index", "Booking");
         }
     }   
 }
